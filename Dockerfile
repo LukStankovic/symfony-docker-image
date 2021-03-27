@@ -100,3 +100,18 @@ RUN mkdir -p /var/www/html/.npm-global
 ENV NPM_CONFIG_PREFIX /var/www/html/.npm-global
 
 ENV COMPOSER_MEMORY_LIMIT=-1
+
+USER root
+
+RUN apt-get update
+RUN apt-get install apt-transport-https
+
+######### MONGO #########
+RUN apt-get update
+RUN apt-get install -y autoconf pkg-config libssl-dev
+RUN pecl install mongodb
+RUN docker-php-ext-install bcmath
+RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
+######### END MONGO #########
+
+USER www-data
