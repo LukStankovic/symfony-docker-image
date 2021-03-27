@@ -20,8 +20,8 @@ RUN apt-get update && apt-get install -y nodejs && apt-get clean
 # install Composer
 COPY ${project_root}/scripts/install-composer.sh /usr/local/bin/install-composer.sh
 
-RUN chmod +x /usr/local/bin/install-composer && \
-    docker-install-composer.sh
+RUN chmod +x /usr/local/bin/install-composer.sh && \
+    install-composer.sh
 
 # libpng-dev needed by "gd" extension
 # libzip-dev needed by "zip" extension
