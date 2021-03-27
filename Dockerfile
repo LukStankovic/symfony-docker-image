@@ -18,7 +18,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
 RUN apt-get update && apt-get install -y nodejs && apt-get clean
 
 # install Composer
-COPY ${project_root}/docker/php/scripts/install-composer.sh /usr/local/bin/install-composer.sh
+COPY ${project_root}/scripts/install-composer.sh /usr/local/bin/install-composer.sh
 
 RUN chmod +x /usr/local/bin/install-composer && \
     docker-install-composer.sh
@@ -75,13 +75,13 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # copy php.ini configuration
-COPY ${project_root}/docker/php/scripts/php.ini /usr/local/etc/php/php.ini
+COPY ${project_root}/scripts/php.ini /usr/local/etc/php/php.ini
 
 # add bash completion for phing
-COPY ${project_root}/docker/php/scripts/phing-completion /etc/bash_completion.d/phing
+COPY ${project_root}/scripts/phing-completion /etc/bash_completion.d/phing
 
 # overwrite the original entry-point from the PHP Docker image with our own
-COPY ${project_root}/docker/php/scripts/entrypoint.sh /usr/local/bin/
+COPY ${project_root}/scripts/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # set www-data user his home directory
